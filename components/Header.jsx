@@ -7,6 +7,7 @@ import { SignOutButton, useAuth } from '@clerk/nextjs';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('/');
   const { isLoaded, userId } = useAuth();
 
   const isSignedIn = isLoaded && !!userId;
@@ -30,22 +31,25 @@ const Header = () => {
           {isSignedIn ? (
             <>
               <Link
+                onClick={() => setActiveTab('create')}
                 href={'/create-chatbot'}
-                className='flex items-center gap-1 hover:text-blue-100 transition-colors'
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors ${ activeTab === 'create' ? 'text-blue-200 ' : ''}`}
               >
                 <FaPlus className='text-sm' />
                 <span>Create</span>
               </Link>
               <Link
+              onClick={() => setActiveTab('edit')}
                 href={'/edit-chatbot'}
-                className='flex items-center gap-1 hover:text-blue-100 transition-colors'
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors ${ activeTab === 'edit' ? 'text-blue-200 ' : ''}`}
               >
                 <FaEdit className='text-sm' />
                 <span>Edit</span>
               </Link>
               <Link
+              onClick={() => setActiveTab('session')}
                 href={'/review-sessions'}
-                className='flex items-center gap-1 hover:text-blue-100 transition-colors'
+                className={`flex items-center gap-1 hover:text-gray-200 transition-colors ${ activeTab === 'session' ? 'text-blue-200 ' : ''}`}
               >
                 <FaHistory className='text-sm' />
                 <span>Sessions</span>
