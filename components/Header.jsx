@@ -3,12 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { FaRobot, FaPlus, FaEdit, FaHistory, FaBars, FaTimes, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
-import { useAuth } from '@clerk/nextjs';
+import { SignOutButton, useAuth } from '@clerk/nextjs';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isLoaded, userId } = useAuth();
-  
+
   const isSignedIn = isLoaded && !!userId;
 
   const toggleMobileMenu = () => {
@@ -50,13 +50,17 @@ const Header = () => {
                 <FaHistory className='text-sm' />
                 <span>Sessions</span>
               </Link>
+
+              <span className='flex items-center gap-1 bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md transition-colors font-medium'>
+                <SignOutButton />
+              </span>
             </>
           ) : (
             <Link
               href={'/sign-in'}
               className='flex items-center gap-1 bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md transition-colors font-medium'
             >
-              <FaUserPlus className='text-sm' />
+              {/* <FaUserPlus className='text-sm' /> */}
               <span>Sign Up</span>
             </Link>
           )}
@@ -101,14 +105,16 @@ const Header = () => {
                     <FaHistory className='text-sm' />
                     <span>Review Sessions</span>
                   </Link>
+                  <span className=' flex items-center justify-center gap-1 bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md transition-colors font-medium'>
+                    <SignOutButton />
+                  </span>
                 </>
               ) : (
                 <Link
                   href={'/sign-in'}
-                  className='flex items-center gap-2 py-2 bg-white text-blue-600 hover:bg-blue-50 px-4 rounded-md transition-colors'
-                  onClick={toggleMobileMenu}
+                  className='flex items-center justify-center gap-1 bg-white text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md transition-colors font-medium'
                 >
-                  <FaUserPlus className='text-sm' />
+                  {/* <FaUserPlus className='text-sm' /> */}
                   <span>Sign Up</span>
                 </Link>
               )}
